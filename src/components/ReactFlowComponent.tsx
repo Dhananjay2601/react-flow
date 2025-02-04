@@ -12,7 +12,7 @@ import { RootState } from "../redux/store";
 
 import "@xyflow/react/dist/style.css";
 import NodeCustomizationPanel from "../components/NodeCustomizationPanel";
-import { Button } from "@mui/material";
+import { Button, Card } from "@mui/material";
 
 const ReactFlowComponent = () => {
   const dispatch = useDispatch();
@@ -48,14 +48,14 @@ const ReactFlowComponent = () => {
         setSelectedNode(node);
       }}
     >
-      <Panel
-        position="top-right"
-        className="bg-amber-700"
-        style={{ display: "flex", gap: "10px", flexDirection: "column" }}
-      >
-        <Button onClick={() => dispatch(undo())}>Undo</Button>
-        <Button onClick={() => dispatch(redo())}>Redo</Button>
-        {selectedNode && <NodeCustomizationPanel selectedNode={selectedNode} />}
+      <Panel position="top-right" className="p-3">
+        <Card className="bg-white/90 dark:bg-gray-900 shadow-lg rounded-xl p-4 flex flex-col gap-3">
+          <Button onClick={() => dispatch(undo())}>Undo</Button>
+          <Button onClick={() => dispatch(redo())}>Redo</Button>
+          {selectedNode && (
+            <NodeCustomizationPanel selectedNode={selectedNode} />
+          )}
+        </Card>
       </Panel>
       <Controls />
       <Background />

@@ -1,5 +1,5 @@
-@import url("./xyflow-themes.css");
 @import "tailwindcss";
+@import url("./xyflow-themes.css");
 
 html,
 body {
