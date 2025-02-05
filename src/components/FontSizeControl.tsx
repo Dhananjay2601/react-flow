@@ -1,25 +1,25 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateNodeFontSize } from "../redux/graphSlice";
 import { Node } from "@xyflow/react";
+import { Box } from "@mui/material";
+import { RootState } from "../redux/store";
+import { updateNodeFontSize } from "../redux/graphSlice";
 
-const FontSizeControl = ({ selectedNode }: { selectedNode: Node }) => {
+const FontSizeControl = ({ selectedNodeId }: { selectedNodeId?: string }) => {
   const dispatch = useDispatch();
-  const node = useSelector((state: any) =>
-    state.graph.present.nodes.find((node: Node) => node.id === selectedNode.id)
+  const node = useSelector((state: RootState) =>
+    state.graph.present.nodes.find((node: Node) => node.id === selectedNodeId)
   );
 
-  if (!node) return null; // Avoid errors if the node is missing
-
-  const fontSize = node.style?.fontSize ?? 16;
+  const fontSize = node?.style?.fontSize ?? 16;
 
   const handleFontSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFontSize = parseInt(e.target.value, 10);
-    dispatch(updateNodeFontSize({ id: node.id, fontSize: newFontSize }));
+    dispatch(updateNodeFontSize({ id: node?.id, fontSize: newFontSize }));
   };
 
   return (
-    <div>
+    <Box className="flex flex-row items-center gap-3 ">
       <label htmlFor="font-size">Font Size: </label>
       <input
         type="range"
@@ -31,7 +31,7 @@ const FontSizeControl = ({ selectedNode }: { selectedNode: Node }) => {
         onChange={handleFontSizeChange}
       />
       <span>{fontSize}px</span>
-    </div>
+    </Box>
   );
 };
 

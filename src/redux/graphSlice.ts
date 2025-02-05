@@ -79,8 +79,6 @@ const graphSlice = createSlice({
     },
 
     undo: (state) => {
-      console.log("undo state>>", state, state.past);
-
       if (state.past.length > 0) {
         const previousState = state.past.pop();
         if (previousState) {

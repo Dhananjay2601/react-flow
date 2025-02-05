@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactFlow, Background, Controls, Panel, Node } from "@xyflow/react";
 import {
@@ -11,12 +11,9 @@ import {
 import { RootState } from "../redux/store";
 
 import "@xyflow/react/dist/style.css";
-import NodeCustomizationPanel from "../components/NodeCustomizationPanel";
-import { Button, Card } from "@mui/material";
 
-const ReactFlowComponent = () => {
+const ReactFlowComponent = ({ setSelectedNode }: { setSelectedNode: any }) => {
   const dispatch = useDispatch();
-  const [selectedNode, setSelectedNode] = useState<Node>();
 
   const nodes = useSelector((state: RootState) => state.graph.present.nodes);
   const edges = useSelector((state: RootState) => state.graph.present.edges);
@@ -48,15 +45,6 @@ const ReactFlowComponent = () => {
         setSelectedNode(node);
       }}
     >
-      <Panel position="top-right" className="p-3">
-        <Card className="bg-white/90 dark:bg-gray-900 shadow-lg rounded-xl p-4 flex flex-col gap-3">
-          <Button onClick={() => dispatch(undo())}>Undo</Button>
-          <Button onClick={() => dispatch(redo())}>Redo</Button>
-          {selectedNode && (
-            <NodeCustomizationPanel selectedNode={selectedNode} />
-          )}
-        </Card>
-      </Panel>
       <Controls />
       <Background />
     </ReactFlow>

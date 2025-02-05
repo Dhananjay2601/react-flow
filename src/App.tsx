@@ -4,17 +4,7 @@ import { Box } from "@mui/material";
 
 function App() {
   return (
-    <Box
-      style={{
-        height: "100vh",
-        width: "100vw",
-        padding: "60px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#000000",
-      }}
-    >
+    <Box className="h-screen w-screen p-10 md:p-16 flex justify-center items-center bg-black">
       <GraphContainer />
     </Box>
   );

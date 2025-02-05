@@ -1,10 +1,10 @@
-import { CompactPicker } from "react-color";
+import { TwitterPicker } from "react-color";
 import { updateNodeColor } from "../redux/graphSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
 interface ColorPickerPropTypes {
-  selectedNodeId: string;
+  selectedNodeId?: string;
 }
 
 const ColorPicker = ({ selectedNodeId }: ColorPickerPropTypes) => {
@@ -19,14 +19,14 @@ const ColorPicker = ({ selectedNodeId }: ColorPickerPropTypes) => {
 
     dispatch(
       updateNodeColor({
-        id: selectedNodeId,
+        id: selectedNodeId ?? "",
         color: newColor,
       })
     );
   };
 
   return (
-    <CompactPicker
+    <TwitterPicker
       color={selectedNode?.style?.backgroundColor ?? "#ffffff"}
       onChange={handleColorChange}
     />

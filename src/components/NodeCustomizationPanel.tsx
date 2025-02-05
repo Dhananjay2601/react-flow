@@ -2,16 +2,18 @@ import React from "react";
 import ColorPicker from "./ColorPicker";
 import FontSizeControl from "./FontSizeControl";
 import { Node } from "@xyflow/react";
+import { Box } from "@mui/material";
 
-const NodeCustomizationPanel = ({ selectedNode }: { selectedNode: Node }) => {
-  if (!selectedNode) return null;
-
+const NodeCustomizationPanel = ({
+  selectedNodeId,
+}: {
+  selectedNodeId: string;
+}) => {
   return (
-    <div style={{ padding: "10px", display: "flex", flexDirection: "column" }}>
-      <h3>Node Customization</h3>
-      <ColorPicker selectedNodeId={selectedNode.id} />
-      <FontSizeControl selectedNode={selectedNode} />
-    </div>
+    <Box className="p-3 gap-4 flex flex-col">
+      <ColorPicker selectedNodeId={selectedNodeId} />
+      <FontSizeControl selectedNodeId={selectedNodeId} />
+    </Box>
   );
 };
 
