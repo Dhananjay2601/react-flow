@@ -18,20 +18,6 @@ const ReactFlowComponent = ({ setSelectedNode }: { setSelectedNode: any }) => {
   const nodes = useSelector((state: RootState) => state.graph.present.nodes);
   const edges = useSelector((state: RootState) => state.graph.present.edges);
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if ((event.ctrlKey || event.metaKey) && event.key === "z") {
-        dispatch(undo());
-      }
-      if ((event.ctrlKey || event.metaKey) && event.key === "y") {
-        dispatch(redo());
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [dispatch]);
-
   return (
     <ReactFlow
       nodes={nodes}
@@ -39,10 +25,19 @@ const ReactFlowComponent = ({ setSelectedNode }: { setSelectedNode: any }) => {
       onNodesChange={(e) => dispatch(onNodesChange(e))}
       onEdgesChange={(e) => dispatch(onEdgesChange(e))}
       onConnect={(e) => dispatch(onConnect(e))}
-      style={{ backgroundColor: "#F7F9FB" }}
+      style={{
+        backgroundColor: "#F7F9FB",
+        borderRadius: "6px",
+      }}
       fitView
       onNodeClick={(_, node: Node) => {
         setSelectedNode(node);
+      }}
+      onNodeDragStart={(_, node: Node) => {
+        setSelectedNode(node);
+      }}
+      onPaneClick={() => {
+        setSelectedNode(null);
       }}
     >
       <Controls />

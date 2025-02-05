@@ -5,7 +5,14 @@ import { Panel, Node } from "@xyflow/react";
 import { Box, Button, Card } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { CancelOutlined, Redo, Undo } from "@mui/icons-material";
+import {
+  CancelOutlined,
+  GitHub,
+  LinkedIn,
+  Mail,
+  Redo,
+  Undo,
+} from "@mui/icons-material";
 import { RootState } from "./redux/store";
 import { redo, undo } from "./redux/graphSlice";
 const GraphContainer: React.FC = () => {
@@ -30,18 +37,15 @@ const GraphContainer: React.FC = () => {
   return (
     <ReactFlowProvider>
       <Box
-        className="flex flex-col flex-grow"
+        className="flex flex-col flex-grow "
         sx={{
           height: 500,
         }}
       >
-        <Button onClick={() => setOpenModal(!openModal)}>
-          Customize Panel
-        </Button>
         <ReactFlowComponent setSelectedNode={setSelectedNode} />
         {openModal && (
           <Panel className="flex justify-center" position="bottom-right">
-            <Card className="bg-white/90 dark:bg-gray-900 shadow-lg rounded-xl p-4 flex flex-col gap-4 ">
+            <Card className="bg-white/90 shadow-lg rounded-xl p-4 flex flex-col gap-4 ">
               <Box className="flex justify-end">
                 <Box
                   className="cursor-pointer"
@@ -75,6 +79,36 @@ const GraphContainer: React.FC = () => {
             </Card>
           </Panel>
         )}
+        <Box className="flex flex-col justify-center items-center gap-1 pt-5 px-5">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setOpenModal(!openModal)}
+            className="w-fit"
+          >
+            Customize Panel
+          </Button>
+          <Box className="flex gap-2">
+            <a
+              title="Dhananjay Pawar LinkedIn Profile"
+              href="https://linkedin.com/in/dhananjay-pawar-2601"
+            >
+              <LinkedIn className="text-white" />
+            </a>
+            <a
+              title="Dhananjay Pawar GitHub Profile"
+              href="https://github.com/Dhananjay2601"
+            >
+              <GitHub className="text-white" />
+            </a>
+            <a
+              title="Dhananjay Pawar GitHub Profile"
+              href="mailto:dhananjaysp01@gmail.com"
+            >
+              <Mail className="text-white" />
+            </a>
+          </Box>
+        </Box>
       </Box>
     </ReactFlowProvider>
   );
